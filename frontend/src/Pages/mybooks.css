@@ -1,0 +1,74 @@
+.mybooks-page {
+    min-height: calc(100vh - 57px);
+    background-color: #e9f1f9;
+    padding: 25px 20px;
+    box-sizing: border-box;
+}
+
+.mybooks-header {
+    margin-left: 20px;
+}
+
+.mybooks-header h1 {
+    margin: 0 0 5px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    color: #142542;
+}
+
+.mybooks-header p {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    color: #526277;
+}
+
+.mybooks-table {
+    width: calc(100% - 40px);
+    margin: 30px 20px 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border: 1px solid #d8e2ec;
+    border-radius: 7px;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+}
+.mybooks-table th {
+    background-color: #e8f0f7;
+    color: #142542;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #d8e2ec;
+}
+.mybooks-table td {
+    padding: 13px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #526277;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Times New Roman", Times, serif;
+}
+.mybooks-table tr:last-child td {
+    border-bottom: none;
+}
+
+.borrowed-book,
+.returned-book {
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
+}
+.borrowed-book {
+    background-color: #d9f0ff;
+    color: #1681c4;
+}
+.returned-book {
+    background-color: #dff5df;
+    color: #26934a;
+}

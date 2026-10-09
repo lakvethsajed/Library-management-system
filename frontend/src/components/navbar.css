@@ -1,0 +1,140 @@
+.header {
+    width: 100%;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-main {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.navlinks {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navlinks img {
+    width: 55px;
+    height: auto;
+    cursor: pointer;
+}
+
+.nav-title {
+    font-size: 1.6rem;
+    font-weight: 550;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-left li {
+    position: relative;
+    cursor: pointer;
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+    font-family: "Times New Roman", serif;
+}
+
+.nav-left li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #287be5;
+    transition: width 0.3s ease;
+}
+
+.nav-left li:hover {
+    color: #287be5;
+}
+
+.nav-left li:hover::after {
+    width: 100%;
+}
+
+
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+#login {
+    display: inline-block;
+    border: 1px solid #287be5;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background-color: white;
+    color: #287be5;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Times New Roman", serif;
+    text-decoration: none;
+}
+#login:hover {
+    background-color: #287be5;
+    color: white;
+}
+#create-account {
+    display: inline-block;
+    border: 1px solid #287be5;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background-color: #287be5;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Times New Roman", serif;
+    text-decoration: none;
+}
+
+#create-account:hover {
+    background-color: white;
+    color: #287be5;
+}
+#logout {
+    border: 1px solid #287be5;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background-color: white;
+    color: #287be5;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Times New Roman", serif;
+    cursor: pointer;
+}
+
+#logout:hover {
+    background-color: #287be5;
+    color: white;
+}
+
+.nav a {
+    text-decoration: none;
+    color: inherit;
+}
+#current-user{
+    font-size:25px;
+    margin-right:10px;
+    margin-top:5px;
+}

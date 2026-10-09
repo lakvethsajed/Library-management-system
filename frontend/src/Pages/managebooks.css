@@ -1,0 +1,340 @@
+.manage-books-page {
+    min-height: calc(100vh - 57px);
+    background-color: #e9f1f9;
+    padding: 25px 20px;
+    box-sizing: border-box;
+}
+
+.manage-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.manage-books-header {
+    margin-left: 20px;
+}
+
+.manage-books-header h1 {
+    margin: 0 0 5px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    color: #142542;
+}
+
+.manage-books-header p {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    color: #526277;
+}
+.Add-book-button {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.3rem;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: 600;
+    background-color: #3591ee;
+    color: white;
+    cursor: pointer;
+}
+
+.Add-book-button:hover {
+    background-color: #0971d8;
+}
+
+.manage-search {
+    display: flex;
+    gap: 1px;
+    margin-top: 30px;
+    margin-right: 5px;
+}
+.manage-search input {
+    width: 550px;
+    height: 50px;
+    padding: 0 18px;
+    border: 1px solid #d4dce5;
+    border-radius: 10px;
+    background-color: white;
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.manage-search button {
+    height: 50px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    background-color: #3591ee;
+    color: white;
+}
+
+.manage-search button:hover {
+    background-color: #0971d8;
+}
+
+.books-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border: 1px solid #d8e2ec;
+    border-radius: 7px;
+    margin-top: 20px;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.books-table th {
+    background-color: #e8f0f7;
+    color: #142542;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #d8e2ec;
+}
+
+.books-table td {
+    padding: 13px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #526277;
+    font-size: 18px;
+    font-weight:500;
+}
+
+.books-table tr:last-child td {
+    border-bottom: none;
+}
+.delete-button{
+    height: 30px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 15px;
+    background-color: rgba(234, 25, 25, 0.832);
+    color: white;
+    
+}
+.copies-button{
+    height: 30px;
+    padding: 0 20px;
+    border: 1px solid rgb(26, 142, 163);
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 15px;
+    background-color: white;
+    color:#3c94ed;
+}
+.update-button{
+    height: 30px;
+    padding: 0 20px;
+    border:none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 15px;
+    background-color: #3c94ed;
+    margin-right:0;
+    color: white;
+}
+.books-table th:last-child,
+.books-table td:last-child {
+    width: 1%;
+    white-space: nowrap;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.books-table td:last-child {
+    text-align: left;
+}
+.delete-button,
+.copies-button{
+    margin-right: 15px;
+}
+.delete-button:hover{
+    background-color: rgba(255, 77, 77, 0.971);
+}
+.update-button:hover{
+    background-color: #047df6;
+}
+
+.add-book-form-container {
+    width: 100%;
+    margin: 0 0 40px;
+    display: flex;
+    justify-content:flex-start;
+    box-sizing: border-box;
+}
+
+.add-book-form {
+    width: 1000px;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #d8e2ec;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(20, 37, 66, 0.10);
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+.form-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.add-book-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.add-book-form-header h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    color: #142542;
+}
+
+.close-form-button {
+    border: none;
+    background: none;
+    font-size: 30px;
+    color: #526277;
+    cursor: pointer;
+}
+
+.close-form-button:hover {
+    color: #142542;
+}
+
+.add-book-form label {
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #142542;
+}
+
+.add-book-form input,
+.add-book-form textarea {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #d4dce5;
+    border-radius: 7px;
+    background-color: white;
+    box-sizing: border-box;
+
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 16px;
+    color: #142542;
+
+    outline: none;
+}
+
+.add-book-form input {
+    height: 45px;
+}
+
+.add-book-form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.add-book-form input:focus,
+.add-book-form textarea:focus {
+    border-color: #287be5;
+    box-shadow: 0 0 0 2px rgba(40, 123, 229, 0.10);
+}
+
+.add-form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.cancel-button,
+.save-book-button {
+    height: 42px;
+    padding: 0 22px;
+    border-radius: 7px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-button {
+    border: 1px solid #d4dce5;
+    background-color: white;
+    color: #526277;
+}
+
+.cancel-button:hover {
+    background-color: #f1f5f9;
+}
+
+.save-book-button {
+    border: none;
+    background-color: #3591ee;
+    color: white;
+}
+
+.save-book-button:hover {
+    background-color: #0971d8;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+    padding-bottom: 20px;
+}
+
+.pagination button {
+    min-width: 42px;
+    height: 40px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 7px;
+    background-color: #e2e8f0;
+    color: #172b4d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #cbd5e1;
+}
+
+.pagination button.active-page {
+    background-color: #287be5;
+    color: white;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

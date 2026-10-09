@@ -1,0 +1,28 @@
+.card {
+    width: 100%;
+    text-align: center;
+    margin: 50px auto;
+}
+
+.card p {
+    margin: 15px 0;
+    color: #526277;
+    font-family: "Times New Roman", serif;
+
+}
+
+.card h2 {
+    margin: 10px 0;
+    font-family: georgia, serif;
+}
+.books-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 25px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}

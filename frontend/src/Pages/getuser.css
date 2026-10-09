@@ -1,0 +1,301 @@
+
+.get-user-page {
+    min-height: calc(100vh - 80px);
+    padding: 30px 45px 45px;
+    background: #eef7ff;
+    box-sizing: border-box;
+    color: #142542;
+}
+
+.get-user-back-button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 24px 10px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #287be5;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.get-user-back-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.get-user-back-button:hover {
+    color: #1769c7;
+}
+
+.get-user-heading {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    max-width: 900px;
+    margin-bottom: 24px;
+}
+
+.get-user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: #dceeff;
+    color: #287be5;
+}
+
+.get-user-avatar svg {
+    width: 34px;
+    height: 34px;
+}
+
+.get-user-heading h1 {
+    margin: 0 0 6px;
+    color: #142542;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    line-height: 1.1;
+}
+
+.get-user-heading p {
+    margin: 0;
+    color: #64748b;
+    font-family: "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.get-user-card {
+    width: 900px;
+    max-width: 100%;
+    margin: 0;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.get-user-card-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.get-user-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #287be5;
+    font-family: "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+.get-user-card-heading h2 {
+    margin: 0 0 6px;
+    color: #142542;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    overflow-wrap: anywhere;
+}
+
+.get-user-card-heading p {
+    margin: 0;
+    color: #64748b;
+    font-family: "Times New Roman", serif;
+    font-size: 16px;
+}
+
+.get-user-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    padding: 7px 12px;
+    border-radius: 7px;
+    background: #e0f2fe;
+    color: #0878c5;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.get-user-role svg {
+    width: 17px;
+    height: 17px;
+}
+
+.get-user-divider {
+    height: 1px;
+    margin: 24px 0;
+    background: #e2e8f0;
+}
+
+.get-user-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.get-user-detail {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    padding: 18px 12px 18px 0;
+    box-sizing: border-box;
+}
+
+.get-user-detail-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 43px;
+    height: 43px;
+    border-radius: 9px;
+    background: #f1f8ff;
+    color: #287be5;
+}
+
+.get-user-detail-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+.get-user-detail > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.get-user-label {
+    color: #64748b;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+}
+
+.get-user-detail strong {
+    color: #142542;
+    font-family: "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.get-user-role-text {
+    text-transform: capitalize;
+}
+
+.get-user-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 180px;
+    text-align: center;
+    color: #64748b;
+    font-family: "Times New Roman", serif;
+    font-size: 17px;
+}
+
+.get-user-state p {
+    margin: 0;
+}
+
+.get-user-error {
+    color: #dc2626;
+}
+
+.get-user-loader {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #dbeafe;
+    border-top-color: #287be5;
+    border-radius: 50%;
+    animation: get-user-spin 0.8s linear infinite;
+}
+
+.get-user-primary-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    background: #287be5;
+    color: white;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.get-user-primary-button:hover {
+    background: #1769c7;
+}
+
+@keyframes get-user-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 700px) {
+    .get-user-page {
+        padding: 24px 18px 35px;
+    }
+
+    .get-user-heading {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .get-user-avatar {
+        width: 52px;
+        height: 52px;
+    }
+
+    .get-user-avatar svg {
+        width: 27px;
+        height: 27px;
+    }
+
+    .get-user-heading h1 {
+        font-size: 30px;
+    }
+
+    .get-user-heading p {
+        font-size: 15px;
+    }
+
+    .get-user-card {
+        padding: 21px 18px;
+    }
+
+    .get-user-card-heading {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .get-user-card-heading h2 {
+        font-size: 26px;
+    }
+
+    .get-user-details-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .get-user-detail {
+        padding: 14px 0;
+    }
+}
