@@ -15,6 +15,65 @@ export default function GetUser(){
     const [user, setUser] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState("");
+    const [deleting, setDelete] = React.useState(false);
+
+const handleDeletion = async () => {
+    const confirmed = window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+    );
+
+    if (!confirmed) return;
+
+    setDelete(true);
+    setError("");
+
+    try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            navigate("/login", { replace: true });
+            return;
+        }
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/users/me",
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        const data = await response.json();
+
+        if (response.status === 401 || response.status === 403) {
+            localStorage.removeItem("token");
+            navigate("/login", { replace: true });
+            return;
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                data.detail || "Failed to delete your account."
+            );
+        }
+
+        localStorage.removeItem("token");
+
+        window.alert(
+            data.data || "Your account has been deleted successfully."
+        );
+
+        navigate("/login", { replace: true });
+
+    } catch (err) {
+        setError(err.message || "Unable to connect to the server.");
+    } finally {
+        setDelete(false);
+    }
+};
+
 
 const token = localStorage.getItem("token");
 
@@ -139,8 +198,13 @@ React.useEffect(() => {
                                 </div>
                             </div>
                         </div>
+                        <div className="get-user-delete-container">
+                            <button type="button" className="get-user-delete-button" onClick={handleDeletion} disabled={deleting}>
+                                {deleting ? "Deleting Account..." : "Delete Account"}</button></div>
                     </section>
+                    
                 ) : null}
+            
             </main>
         </>
     );}
