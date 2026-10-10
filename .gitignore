@@ -20,3 +20,5 @@ frontend/dist/
 
 # Unused files
 not needed/
+.neon
+.env.local
