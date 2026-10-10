@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import NavHeader from "../components/navbar";
 import { useNavigate } from "react-router-dom";
 import "./books.css";
-
+import API_BASE_URL from "../api";
 function Books() {
 
     const [books, setBooks] = useState([]);
@@ -13,23 +13,17 @@ function Books() {
     const navigate = useNavigate();
 
     useEffect(() => {
+    fetch(`${API_BASE_URL}/books/?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`)
+        .then((response) => response.json())
+        .then((data) => {
+            setBooks(data.books);
+            setTotalBooks(data.total);
+        })
+        .catch((error) => {
+            console.error("Error fetching books:", error);
+        });
+}, [search, page]);
 
-        fetch(
-            `http://127.0.0.1:8000/books/?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`
-        )
-            .then((response) => response.json())
-            .then((data) => {
-
-                setBooks(data.books);
-
-                setTotalBooks(data.total);
-
-            })
-            .catch((error) => {
-                console.error("Error fetching books:", error);
-            });
-
-    }, [search, page]);
     const totalPages = Math.ceil(totalBooks / limit);
     const handleViewMore = (bookId) => {
     const token = localStorage.getItem("token");

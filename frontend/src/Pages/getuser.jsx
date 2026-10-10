@@ -2,6 +2,7 @@ import NavHeader from "../components/navbar";
 import "./getuser.css"
 import { useNavigate } from "react-router-dom"
 import React from "react"
+import API_BASE_URL from "../api";
 import {
     UserRound,
     ShieldCheck,
@@ -36,7 +37,7 @@ const handleDeletion = async () => {
         }
 
         const response = await fetch(
-            "http://127.0.0.1:8000/users/me",
+            `${API_BASE_URL}/users/me`,
             {
                 method: "DELETE",
                 headers: {
@@ -85,7 +86,7 @@ React.useEffect(() => {
     const fetchUser = async () => {
         try {
             const response = await fetch(
-                "http://127.0.0.1:8000/users/me",
+                `${API_BASE_URL}/users/me`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

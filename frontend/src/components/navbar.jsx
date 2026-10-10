@@ -3,6 +3,7 @@ import "./navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { SlUser } from "react-icons/sl";
+import API_BASE_URL from "../api";
 
 export default function NavHeader() {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function NavHeader() {
         async function getUser() {
             try {
                 const response = await fetch(
-                    "http://127.0.0.1:8000/users/me",
+                    `${API_BASE_URL}/users/me`,
                     {
                         headers: {
                             "Authorization": `Bearer ${token}`
@@ -48,7 +49,7 @@ export default function NavHeader() {
 
         if (token) {
             try {
-                await fetch("http://127.0.0.1:8000/logout", {
+                await fetch(`${API_BASE_URL}/logout`, {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${token}`

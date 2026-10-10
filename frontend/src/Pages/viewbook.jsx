@@ -2,7 +2,7 @@ import NavHeader from "../components/navbar";
 import React from "react";
 import "./viewbook.css";
 import { useParams, useNavigate } from "react-router-dom";
-
+import API_BASE_URL from "../api";
 import {
     LuArrowLeft,
     LuBookOpen,
@@ -27,7 +27,7 @@ export default function ViewBook() {
     const role = localStorage.getItem("role");
     React.useEffect(() => {
 
-        fetch(`http://127.0.0.1:8000/books/${id}`)
+        fetch(`${API_BASE_URL}/books/${id}`)
             .then((response) => response.json())
             .then((data) => {
                 setBook(data);
@@ -44,7 +44,7 @@ export default function ViewBook() {
             return;
         }
 
-        fetch("http://127.0.0.1:8000/issues/mybooks", {
+        fetch(`${API_BASE_URL}/issues/mybooks`, {
             headers: {
                 "Authorization": `Bearer ${token}`,
             }
@@ -84,7 +84,7 @@ export default function ViewBook() {
 
     const handleBorrow = () => {
         setLoadingAction(true);
-        fetch("http://127.0.0.1:8000/issues/", {
+        fetch(`${API_BASE_URL}/issues/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -127,7 +127,7 @@ export default function ViewBook() {
             return;
         }
         setLoadingAction(true);
-        fetch(`http://127.0.0.1:8000/issues/return/${issueId}`, {
+        fetch(`${API_BASE_URL}/issues/return/${issueId}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`,

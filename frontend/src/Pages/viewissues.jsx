@@ -1,7 +1,7 @@
 import Navheader from "../components/navbar";
 import "./issues.css";
 import React from "react";
-
+import API_BASE_URL from "../api";
 export default function ViewIssue() {
 
     const [issues, setIssues] = React.useState([]);
@@ -14,7 +14,7 @@ export default function ViewIssue() {
     const token = localStorage.getItem("token");
 
     fetch(
-        `http://127.0.0.1:8000/issues/all?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`,
+      `${API_BASE_URL}/issues/all?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`,
         {
             headers: {
                 "Authorization": `Bearer ${token}`,

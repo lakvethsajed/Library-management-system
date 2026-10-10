@@ -1,5 +1,6 @@
 import NavHeader from "../components/navbar";
 import "./managebooks.css";
+import API_BASE_URL from "../api";
 import React from "react";
 export default function Manage() {
     const [books, setbooks] = React.useState([])
@@ -18,7 +19,7 @@ export default function Manage() {
     });
    React.useEffect(() => {
     fetch(
-        `http://127.0.0.1:8000/books/?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`
+        `${API_BASE_URL}/books/?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`
     )
         .then((response) => response.json())
         .then((data) => {
@@ -37,7 +38,7 @@ const totalPages = Math.ceil(totalBooks / limit);
     async function handleAddBook(e){
         e.preventDefault();
         const token = localStorage.getItem("token");
-        const response = await fetch("http://127.0.0.1:8000/books/",{
+        const response = await fetch(`${API_BASE_URL}/books/`,{
             method : "POST",
             headers : {
                 "Authorization" : `Bearer ${token}`,
@@ -74,7 +75,7 @@ const totalPages = Math.ceil(totalBooks / limit);
 
     console.log("Deleting book:", id);
 
-    const response = await fetch(`http://127.0.0.1:8000/books/${id}`,
+    const response = await fetch(`${API_BASE_URL}/books/${id}`,
         {
             method: "DELETE",
             headers :{
@@ -112,7 +113,7 @@ const totalPages = Math.ceil(totalBooks / limit);
             return;
         }
         const token = localStorage.getItem("token")
-        const response = await fetch( `http://127.0.0.1:8000/books/${id}/copies?copies=${copies}`,{
+        const response = await fetch( `${API_BASE_URL}/books/${id}/copies?copies=${copies}`,{
             method:"DELETE",
             headers:{
                 "Authorization" : `Bearer ${token}`
@@ -158,7 +159,7 @@ const totalPages = Math.ceil(totalBooks / limit);
             return;
         }
         const token = localStorage.getItem("token");
-        const response = await fetch(`http://127.0.0.1:8000/books/${book.id}`,{
+        const response = await fetch(`${API_BASE_URL}/books/${book.id}`,{
             method :"PUT",
             headers :{
                 "Authorization" : `Bearer ${token}`,

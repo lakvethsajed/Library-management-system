@@ -3,6 +3,7 @@ import NavHeader from "../components/navbar"
 import "./auth.css"
 import Footer from "../components/Footer"
 import React from "react"
+import API_BASE_URL from "../api";
 
 export default function Login() {
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ export default function Login() {
     formData.append("username", username);
     formData.append("password", password);
      
-    const response = await fetch("http://127.0.0.1:8000/login",{
+    const response = await fetch(`${API_BASE_URL}/login`,{
       method : "POST",
       headers:{
         "Content-Body" : "application/x-www-form-urlencoded"

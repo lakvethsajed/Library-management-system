@@ -3,6 +3,7 @@ import NavHeader from "../components/navbar";
 import "./auth.css"
 import Footer from "../components/Footer"
 import React from "react"
+import API_BASE_URL from "../api";
 
 export default function Register() {
   const navigate = useNavigate()
@@ -58,8 +59,8 @@ export default function Register() {
       email: email,
       password: password
     }
-
-    const response = await fetch("http://127.0.0.1:8000/users/", {
+      
+      const response = await fetch(`${API_BASE_URL}/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

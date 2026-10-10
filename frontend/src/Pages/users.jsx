@@ -1,6 +1,7 @@
 import NavHeader from "../components/navbar";
 import "./users.css";
 import React from "react";
+import API_BASE_URL from "../api";
 
 export default function Users() {
 
@@ -9,7 +10,7 @@ export default function Users() {
 
   React.useEffect(()=>{
     const token = localStorage.getItem("token");
-    fetch(`http://127.0.0.1:8000/users/all?search=${search}`,{
+    fetch(`${API_BASE_URL}/users/all?search=${search}`,{
         headers:{
             "Authorization": `Bearer ${token}`,
         }
