@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from . import models
-from .database import engine ,SessionLocal
+from .database import SessionLocal
 from . import config
 from .routers import users
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,7 +9,6 @@ from .routers.users import create_admin
 from .routers import auth
 from .routers import books
 from .routers import issues
-models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -20,7 +19,7 @@ def startup():
         create_admin(db)
     finally:
         db.close()
-origins = ["*"]
+origins = [" http://localhost:5173 "]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
