@@ -49,3 +49,10 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+@media (max-width: 700px) {
+    .cardbook { width: 100%; max-width: 420px; }
+    .cardbook img { height: clamp(180px, 55vw, 280px); object-fit: contain; }
+    .cardbook h3 { font-size: 22px; overflow-wrap: anywhere; }
+    .cardbook .author { font-size: 16px; }
+}

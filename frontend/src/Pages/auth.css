@@ -158,3 +158,16 @@ body {
     font-weight: 600;
     text-align: left;
 }
+
+@media (max-width: 900px) {
+    .auth { align-items: center; background-size: cover; background-position: center; }
+    .auth form { width: min(420px, calc(100% - 40px)); margin: 45px auto 75px; }
+    .auth > p { width: min(420px, calc(100% - 40px)); margin: -55px auto 45px; }
+}
+@media (max-width: 480px) {
+    .auth { min-height: 100vh; padding: 20px 0; background-image: linear-gradient(rgba(248,245,239,.88), rgba(248,245,239,.94)), url("../assets/login.jpg"); }
+    .auth form { width: calc(100% - 28px); margin: 20px auto 70px; padding: 26px 20px; }
+    .auth form h1 { font-size: 32px; }
+    .auth form label { font-size: 16px; }
+    .auth > p { width: calc(100% - 28px); margin: -55px auto 20px; font-size: 14px; }
+}

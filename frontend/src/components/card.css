@@ -26,3 +26,12 @@
     padding: 0 40px;
     box-sizing: border-box;
 }
+
+@media (max-width: 900px) {
+    .card { margin: 35px auto; }
+    .books-container { flex-wrap: wrap; padding: 0 22px; gap: 18px; }
+}
+@media (max-width: 600px) {
+    .card { margin: 28px auto; }
+    .books-container { padding: 0 12px; gap: 14px; }
+}

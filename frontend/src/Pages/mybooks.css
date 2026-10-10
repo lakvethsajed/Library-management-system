@@ -72,3 +72,19 @@
     background-color: #dff5df;
     color: #26934a;
 }
+
+@media (max-width: 900px) {
+    .mybooks-page { padding: 22px 16px; }
+    .mybooks-header { margin-left: 8px; }
+    .mybooks-table { display: block; width: 100%; margin: 24px 0 16px; overflow-x: auto; }
+    .mybooks-table th, .mybooks-table td { white-space: nowrap; }
+}
+@media (max-width: 480px) {
+    .mybooks-page { padding: 18px 10px; }
+    .mybooks-header { margin-left: 4px; }
+    .mybooks-header h1 { font-size: 29px; }
+    .mybooks-header p { font-size: 14px; }
+    .mybooks-table th { padding: 10px; font-size: 13px; }
+    .mybooks-table td { padding: 10px; font-size: 15px; }
+    .borrowed-book, .returned-book { padding: 8px 10px; font-size: 14px; }
+}

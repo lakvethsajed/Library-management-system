@@ -334,3 +334,27 @@
     width: 20px;
     height: 20px;
 }
+
+@media (max-width: 900px) {
+    .view-book-page { padding: 26px 22px 35px; }
+    .book-details-card { width: 100%; gap: 22px; }
+    .book-details-image, .book-details-image img { width: 220px; }
+    .book-details-image img { height: 330px; }
+    .book-details-content h1 { font-size: 34px; }
+}
+@media (max-width: 650px) {
+    .view-book-page { padding: 20px 12px 28px; }
+    .back-button { margin-left: 0; }
+    .book-details-card { flex-direction: column; align-items: stretch; gap: 20px; padding: 18px; }
+    .book-details-image { width: 100%; display: flex; justify-content: center; }
+    .book-details-image img { width: min(240px, 100%); height: auto; max-height: 340px; object-fit: contain; }
+    .book-details-content h1 { font-size: 29px; overflow-wrap: anywhere; }
+    .book-details-author { font-size: 17px; }
+    .book-availability { flex-wrap: wrap; gap: 12px; padding: 12px; }
+    .availability-item { min-width: 120px; }
+    .availability-divider { display: none; }
+    .availability-item strong { font-size: 20px; }
+    .book-extra-details { flex-wrap: wrap; gap: 14px; }
+    .extra-detail { min-width: 120px; }
+    .extra-divider { display: none; }
+}

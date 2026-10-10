@@ -18,3 +18,7 @@ body {
     min-height: 100vh;
 }
 
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-wrap: break-word; }
+img, video, canvas, svg { max-width: 100%; }
+input, button, textarea, select { max-width: 100%; }

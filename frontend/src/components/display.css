@@ -167,3 +167,27 @@
         transparent 100%
     );
 }
+@media (max-width: 900px) {
+    .display { height: auto; min-height: 560px; }
+    .display-content { width: 62%; padding: 42px 32px; }
+    .library-title { font-size: 38px; padding: 8px; }
+    .stats-container { flex-wrap: wrap; gap: 16px 0; }
+    .stat { min-width: 90px; padding: 0 16px; }
+    .display-image { width: 58%; }
+}
+@media (max-width: 600px) {
+    .display { min-height: 0; padding-bottom: 24px; }
+    .display-image { position: relative; width: 100%; height: 230px; }
+    .display-image::after { width: 100%; background: linear-gradient(to bottom, transparent 55%, #f8f5ef 100%); }
+    .display-content { width: 100%; padding: 24px 18px 10px; }
+    .welcome-message { font-size: 12px; }
+    .library-title { max-width: 100%; font-size: 32px; padding: 0; }
+    .library-description { font-size: 16px; }
+    .search-container { max-width: 100%; }
+    #search-input { min-width: 0; font-size: 16px; }
+    .btn { padding: 10px 15px; }
+    .stats-container { justify-content: space-between; margin-top: 24px; }
+    .stat { flex: 1; min-width: 0; padding: 0 10px; }
+    .stat h3 { font-size: 23px; }
+    .stat p { font-size: 14px; }
+}
