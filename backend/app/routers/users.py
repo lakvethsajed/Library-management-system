@@ -7,6 +7,7 @@ from ..database import get_db
 from typing import List
 from sqlalchemy.orm import Session
 from datetime import datetime
+import os
 
 
 router = APIRouter(
@@ -64,23 +65,35 @@ async def get_user(id : int,db:Session = Depends(get_db),current_user = Depends(
         raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail = f"The user with {id} is not found")
     return user 
 
-def create_admin(db: Session = Depends(get_db)):
-    admin = db.query(models.User).filter(models.User.username == "admin").first()
+def create_admin(db: Session):
+    admin = (
+        db.query(models.User)
+        .filter(models.User.username == "admin")
+        .first()
+    )
+
     if admin is not None:
         return
-    hashed_password = utils.hashing("Admin@123")
+
+    admin_password = os.getenv("ADMIN_PASSWORD")
+    if not admin_password:
+        raise RuntimeError(
+            "ADMIN_PASSWORD environment variable must be set"
+        )
+
+    hashed_password = utils.hashing(admin_password)
+
     new_admin = models.User(
-        name = "Library Admin",
-        username = "admin",
-        email = "admin@library.com",
-        password = hashed_password,
-        role = "admin"
+        name="Library Admin",
+        username="admin",
+        email=os.getenv("ADMIN_EMAIL", "admin@library.com"),
+        password=hashed_password,
+        role="admin",
     )
+
     db.add(new_admin)
     db.commit()
-
     db.refresh(new_admin)
-
 
 @router.delete("/me")
 async def delete_my_account(db: Session = Depends(get_db),current_user = Depends(oauth2.normal_user)):

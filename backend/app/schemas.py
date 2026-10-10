@@ -1,18 +1,30 @@
-from pydantic import BaseModel,EmailStr, Field ,field_validator
-from typing import Optional,List
+
+from pydantic import BaseModel, EmailStr, Field, field_validator, ConfigDict
+from typing import Optional, List
 from datetime import datetime
+
+
 class BookBase(BaseModel):
-    title : str
-    author : str
-    genre : str
-    available : bool = True 
-    description : Optional[str] = None 
-    total_copies : int = 1
-    image_url : Optional[str] = None
-    available_copies : int = 1
+    title: str
+    author: str
+    genre: str
+    available: bool = True
+    description: Optional[str] = None
+    total_copies: int = 1
+    image_url: Optional[str] = None
+    available_copies: int = 1
+
 
 class Addbook(BookBase):
     pass
+
+
+class BookResponse(BookBase):
+    id: int
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
 
 class Pagining(BaseModel):
     books: List[BookResponse]
@@ -20,22 +32,20 @@ class Pagining(BaseModel):
     page: int
     limit: int
 
-class BookResponse(BookBase):
-    id : int
-    created_at : datetime
-    class config:
-        orm_mode = True
 
 class Registeruser(BaseModel):
-    name : str
-    username : str
-    email : EmailStr
-    password : str = Field(max_length=72)
+    name: str
+    username: str
+    email: EmailStr
+    password: str = Field(max_length=72)
 
     @field_validator("username")
-    def validate_username(cls, value):
+    @classmethod
+    def validate_username(cls, value: str) -> str:
         if not value.replace("_", "").isalnum():
-            raise ValueError("Username can contain only letters, numbers and underscore")
+            raise ValueError(
+                "Username can contain only letters, numbers and underscore"
+            )
         if len(value) < 3:
             raise ValueError("Username must contain at least 3 characters")
         if len(value) > 20:
@@ -43,7 +53,8 @@ class Registeruser(BaseModel):
         return value
 
     @field_validator("password")
-    def validate_password(cls, value):
+    @classmethod
+    def validate_password(cls, value: str) -> str:
         if len(value) < 8:
             raise ValueError("Password must contain at least 8 characters")
         if not any(char.isupper() for char in value):
@@ -56,13 +67,15 @@ class Registeruser(BaseModel):
             raise ValueError("Password must contain at least one special character")
         return value
 
+
 class responseuser(BaseModel):
-    name : str
-    username : str
-    email : EmailStr
-    class config:
-        orm_mode = True
-        
+    name: str
+    username: str
+    email: EmailStr
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 class AllUserResponse(BaseModel):
     id: int
     name: str
@@ -72,33 +85,38 @@ class AllUserResponse(BaseModel):
     created_at: datetime
     is_logged_in: bool
 
-    class config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
+
+
 class loginuser(BaseModel):
-    username : str
+    username: str
     password: str
 
+
 class Token_valid(BaseModel):
-    access_token : str
-    token_type : str
-    role : str
+    access_token: str
+    token_type: str
+    role: str
+
 
 class Tokendata(BaseModel):
-    id : int
+    id: int
+
 
 class Issuebooks(BaseModel):
-    book_id : int
+    book_id: int
+
 
 class ResponseBook(BaseModel):
-    id : int
-    book_id : int
-    user_id : int
-    issued_at : datetime
-    due_date : datetime
-    returned_at : Optional[datetime] = None
+    id: int
+    book_id: int
+    user_id: int
+    issued_at: datetime
+    due_date: datetime
+    returned_at: Optional[datetime] = None
 
-    class config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
+
 
 class MyBookResponse(BaseModel):
     issue_id: int
@@ -110,11 +128,13 @@ class MyBookResponse(BaseModel):
     due_date: datetime
     returned_at: Optional[datetime] = None
 
+
 class CurrentUserResponse(BaseModel):
     name: str
     username: str
     email: EmailStr
     role: str
+
 
 class PaginatedIssues(BaseModel):
     issues: List[MyBookResponse]

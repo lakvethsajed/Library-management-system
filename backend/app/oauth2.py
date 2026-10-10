@@ -35,7 +35,7 @@ def validate_token(token: str, credentials_exception):
 def current_user(token : str = Depends(oauth_scheme), db : Session = Depends(get_db)):
     credentials_exception = HTTPException(status_code = status.HTTP_401_UNAUTHORIZED, detail = "Could not verify the credentials", headers={"WWW-Authenticate": "Bearer"})
     token_data = validate_token(token , credentials_exception)
-    session = db.query(models.Login_session).filter(models.Login_session.Token == token,models.Login_session.revoked == False).first()
+    session = db.query(models.Login_session).filter(models.Login_session.Token == token, models.Login_session.revoked == False, models.Login_session.expiry_time > datetime.now(timezone.utc)).first()
     if session is None:
         raise credentials_exception 
     user = db.query(models.User).filter(models.User.id == token_data.id).first()
