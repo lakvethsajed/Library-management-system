@@ -161,20 +161,12 @@ export default function ViewIssue() {
                                 </td>
 
                                 <td>
-                                    <span
-                                        className={
-                                            issue.returned_at
-                                                ? "issue-status returned"
-                                                : "issue-status borrowed"
-                                        }
-                                    >
+                                    <span className={issue.returned_at ? "issue-status returned" : issue.return_requested ? "issue-status return-requested" : "issue-status borrowed"}>
                                         {issue.returned_at
-                                            ? "Returned"
-                                            : issue.return_requested
-                                                ? "Return Requested"
-                                                : "Borrowed"
-                                        }
-                                    </span>
+                                        ? "Returned"
+                                        : issue.return_requested
+                                        ? "Return Requested"
+                                        : "Borrowed"}</span>
                                 </td>
 
                                 <td>

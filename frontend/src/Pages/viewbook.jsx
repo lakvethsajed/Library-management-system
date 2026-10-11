@@ -1,3 +1,4 @@
+
 import NavHeader from "../components/navbar";
 import React from "react";
 import "./viewbook.css";
@@ -22,9 +23,11 @@ export default function ViewBook() {
     const [isBorrowed, setIsBorrowed] = React.useState(false);
     const [issueId, setIssueId] = React.useState(null);
     const [loadingAction, setLoadingAction] = React.useState(false);
+    const [returnRequested, setReturnRequested] = React.useState(false);
 
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
+
     React.useEffect(() => {
 
         fetch(`${API_BASE_URL}/books/${id}`)
@@ -69,10 +72,14 @@ export default function ViewBook() {
 
                     setIsBorrowed(true);
                     setIssueId(activeIssue.issue_id);
+                    setReturnRequested(
+                        activeIssue.return_requested === true
+                    );
 
                 } else {
                     setIsBorrowed(false);
                     setIssueId(null);
+                    setReturnRequested(false);
                 }
 
             })
@@ -82,8 +89,10 @@ export default function ViewBook() {
 
     }, [id, role, token]);
 
+
     const handleBorrow = () => {
         setLoadingAction(true);
+
         fetch(`${API_BASE_URL}/issues/`, {
             method: "POST",
             headers: {
@@ -107,6 +116,8 @@ export default function ViewBook() {
                 alert("Book borrowed successfully!");
                 setIsBorrowed(true);
                 setIssueId(data.id);
+                setReturnRequested(false);
+
                 setBook((previousBook) => ({
                     ...previousBook,
                     available_copies:
@@ -114,66 +125,70 @@ export default function ViewBook() {
                 }));
             })
             .catch((error) => {
-               console.error("Error borrowing book:", error);
+                console.error("Error borrowing book:", error);
                 alert("Could not borrow the book.");
             })
             .finally(() => {
                 setLoadingAction(false);
             });
     };
+
+
     const handleReturn = () => {
         if (!issueId) {
             alert("Issue record not found.");
             return;
         }
+
         setLoadingAction(true);
+
         fetch(`${API_BASE_URL}/issues/return/${issueId}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`,
-            }
+            },
         })
-            .then((response) => {
+            .then(async (response) => {
+                const data = await response.json();
 
                 if (!response.ok) {
-                    throw new Error("Could not return book");
+                    throw new Error(
+                        data.detail || "Could not request book return"
+                    );
                 }
-                return response.json();
-            })
-            .then((data) => {
-                alert("Book returned successfully!");
-                setIsBorrowed(false);
-                setIssueId(null);
-                setBook((previousBook) => ({
-                    ...previousBook,
-                    available_copies:
-                        previousBook.available_copies + 1
-                }));
 
+                return data;
+            })
+            .then(() => {
+                setReturnRequested(true);
+                alert(
+                    "Return request submitted. Awaiting admin confirmation."
+                );
             })
             .catch((error) => {
-                console.error("Error returning book:", error);
-                alert("Could not return the book.");
+                console.error("Error requesting return:", error);
+                alert(error.message || "Could not request book return.");
             })
             .finally(() => {
                 setLoadingAction(false);
             });
     };
 
+
     if (!book) {
         return (
             <>
-               <NavHeader />
+                <NavHeader />
                 <div className="view-book-page">
                     <p>Loading book...</p>
                 </div>
             </>
         );
-
     }
+
     return (
         <>
-           <NavHeader />
+            <NavHeader />
             <div className="view-book-page">
                 <button className="back-button" onClick={() => navigate("/books")}>
                     <LuArrowLeft />
@@ -182,12 +197,14 @@ export default function ViewBook() {
 
                 <div className="book-details-card">
                     <div className="book-details-image">
-                        <img src={book.image_url} alt={book.title}/>
+                        <img src={book.image_url} alt={book.title} />
                     </div>
+
                     <div className="book-details-content">
                         <h1>{book.title}</h1>
                         <p className="book-details-author">{book.author}</p>
                         <span className="book-details-genre">{book.genre}</span>
+
                         <div className="book-availability">
                             <div className="availability-item">
                                 <span className="availability-icon"><GiBookshelf /></span>
@@ -196,20 +213,23 @@ export default function ViewBook() {
                                     <strong>{book.total_copies}</strong>
                                 </div>
                             </div>
+
                             <div className="availability-divider"></div>
+
                             <div className="availability-item">
                                 <span className="availability-icon"><LuBookOpen /></span>
                                 <div>
                                     <span>Available Copies</span>
                                     <strong>{book.available_copies}</strong>
                                 </div>
-                            </div>     
                             </div>
+                        </div>
 
                         <div className="book-description-section">
                             <h2>Description</h2>
                             <p>{book.description}</p>
                         </div>
+
                         <div className="book-extra-details">
                             <div className="extra-detail">
                                 <span className="extra-icon">
@@ -220,7 +240,9 @@ export default function ViewBook() {
                                     <strong>{book.author}</strong>
                                 </div>
                             </div>
+
                             <div className="extra-divider"></div>
+
                             <div className="extra-detail">
                                 <span className="extra-icon"><LuTag /></span>
                                 <div>
@@ -233,23 +255,43 @@ export default function ViewBook() {
                         {role === "user" && (
                             <div className="book-actions">
                                 {isBorrowed ? (
-                                    <button className="return-book-button" onClick={handleReturn}disabled={loadingAction}>
-                                        <LuBookOpen />
-                                        {loadingAction
-                                            ? "Returning..."
-                                            : "Return Book"
-                                        }
-                                    </button>
+                                    returnRequested ? (
+                                        <button
+                                            className="return-book-button"
+                                            disabled
+                                        >
+                                            Awaiting Admin Confirmation
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className="return-book-button"
+                                            onClick={handleReturn}
+                                            disabled={loadingAction}
+                                        >
+                                            <LuBookOpen />
+                                            {loadingAction
+                                                ? "Submitting Request..."
+                                                : "Request Return"
+                                            }
+                                        </button>
+                                    )
                                 ) : book.available_copies > 0 ? (
-                                    <button className="borrow-book-button" onClick={handleBorrow} disabled={loadingAction}>
-                                       <LuBookOpen />
+                                    <button
+                                        className="borrow-book-button"
+                                        onClick={handleBorrow}
+                                        disabled={loadingAction}
+                                    >
+                                        <LuBookOpen />
                                         {loadingAction
                                             ? "Borrowing..."
                                             : "Borrow Book"
                                         }
                                     </button>
                                 ) : (
-                                    <button className="borrow-book-button unavailable-button" disabled>
+                                    <button
+                                        className="borrow-book-button unavailable-button"
+                                        disabled
+                                    >
                                         <LuBookOpen />
                                         Currently Unavailable
                                     </button>
