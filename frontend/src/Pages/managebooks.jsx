@@ -137,62 +137,106 @@ const totalPages = Math.ceil(totalBooks / limit);
             alert(data.detail)
         }
     }
-    async function handleUpdate(book){
-        const title = prompt("Enter new title",book.title);
-        if(title == null){
-            return;
-        }
-        const author = prompt("Enter new author", book.author);
-        if(author == null){
-            return;
-        }
-        const genre = prompt("Enter new book genre", book.genre);
-        if(genre == null){
-            return;
-        }
-        const description = prompt("Enter new book description", book.description || "");
-        if(description == null){
-            return;
-        }
-        const total_copies = prompt("Enter the total copies u need to add", book.total_copies)
-        if(total_copies == null){
-            return;
-        }
-        const token = localStorage.getItem("token");
-        const response = await fetch(`${API_BASE_URL}/books/${book.id}`,{
-            method :"PUT",
-            headers :{
-                "Authorization" : `Bearer ${token}`,
-                "Content-Type": "application/json"
+async function handleUpdate(book) {
+    const title = prompt("Enter new title", book.title);
+    if (title === null) return;
 
-            },
-            body : JSON.stringify({
-                title : title,
-                author : author,
-                genre : genre,
-                description : description,
-                total_copies : Number(total_copies)
+    const author = prompt("Enter new author", book.author);
+    if (author === null) return;
 
-            })
-        }
+    const genre = prompt("Enter new book genre", book.genre);
+    if (genre === null) return;
+
+    const description = prompt(
+        "Enter new book description",
+        book.description || ""
+    );
+    if (description === null) return;
+
+    const total_copies = prompt(
+        "Enter the total copies you need",
+        book.total_copies
+    );
+    if (total_copies === null) return;
+
+    const cleanTitle = title.trim();
+    const cleanAuthor = author.trim();
+    const cleanGenre = genre.trim();
+    const cleanDescription = description.trim();
+    const copies = Number(total_copies);
+    if (!cleanTitle || !cleanAuthor || !cleanGenre) {
+        alert("Title, author, and genre cannot be empty.");
+        return;
+    }
+    const namePattern = /^[A-Za-z0-9 ]+$/;
+
+    if (!namePattern.test(cleanTitle)) {
+        alert("Book title can contain only letters, numbers, and spaces.");
+        return;
+    }
+
+    if (!namePattern.test(cleanAuthor)) {
+        alert("Author name can contain only letters, numbers, and spaces.");
+        return;
+    }
+    const genrePattern = /^[A-Za-z ]+$/;
+
+    if (!genrePattern.test(cleanGenre)) {
+        alert("Genre can contain only letters and spaces.");
+        return;
+    }
+    if (
+        total_copies.trim() === "" ||
+        !Number.isInteger(copies) ||
+        copies < 1
+    ) {
+        alert("Total copies must be a whole number greater than 0.");
+        return;
+    }
+
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/books/${book.id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: cleanTitle,
+                    author: cleanAuthor,
+                    genre: cleanGenre,
+                    description: cleanDescription,
+                    total_copies: copies
+                })
+            }
         );
-        const data = await response.json()
-         if (response.ok) {
+
+        const data = await response.json();
+
+        if (response.ok) {
             setbooks((books) =>
                 books.map((oldBook) =>
-                oldBook.id === book.id
-                    ? data
-                    : oldBook
-            )
-        );
+                    oldBook.id === book.id ? data : oldBook
+                )
+            );
 
-    } else {
-
-        alert(data.detail);
-
+            alert("Book updated successfully!");
+        } else {
+            alert(
+                typeof data.detail === "string"
+                    ? data.detail
+                    : "Could not update the book. Please check your inputs."
+            );
+        }
+    } catch (error) {
+        console.error("Error updating book:", error);
+        alert("Could not connect to the server. Please try again.");
     }
-
-    }
+}
 
     return (
         <>
@@ -206,40 +250,73 @@ const totalPages = Math.ceil(totalBooks / limit);
                                 <h2>Add New Book</h2>
                                 <button className="close-form-button" onClick={()=> setform(false)} type="button">x</button>
                             </div>
-                            <div className="form-row">
-                                <div className="form-field">
-                                    <label>Book Title</label>
-                                    <input type="text" placeholder="Enter the book title you want to add..." value={newBook.title} 
-                                    onChange={(e)=> setnewBook({...newBook,title: e.target.value})} required/>
-                                </div>
-                                  <div className="form-field">
-                                    <label>Book Author</label>
-                                    <input type="text" placeholder="Enter the new Book author..." value={newBook.author}
-                                    onChange={(e)=> setnewBook({...newBook, author: e.target.value})} required/>
-                                </div>
+                          <div className="form-row">
+                            <div className="form-field">
+                                <label>Book Title <span className="required-star">*</span></label>
+                                <input type="text" placeholder="Enter the book title..." value={newBook.title}
+                                onChange={(e) => setnewBook({
+                                    ...newBook, title: e.target.value})} required pattern="[A-Za-z0-9 ]+"/>
                             </div>
-                            <div className="form-row">
-                                <div className="form-field">
-                                    <label>Book Genre</label>
-                                    <input type="text" placeholder="Enter the new Book Genre..." value={newBook.genre}
-                                    onChange={(e)=> setnewBook({...newBook, genre: e.target.value})} required/>
-                                </div>
-                                <div className="form-field">
-                                    <label>Total Copies</label>
-                                    <input type="number" min="1" placeholder="Enter the no of Copies you wish to add..." value={newBook.total_copies}
-                                    onChange={(e)=> setnewBook({...newBook, total_copies: e.target.value})} required/>
-                                </div>
+                            <div className="form-field">
+                                <label>Book Author <span className="required-star">*</span></label>
+                                <input type="text" placeholder="Enter the book author..." value={newBook.author}
+                                onChange={(e) => setnewBook({
+                                    ...newBook, author: e.target.value
+                                })} pattern="[A-Za-zÀ-ÿ '-]+" title="Author name can contain letters, spaces, hyphens and apostrophes only." required/>
                             </div>
-                            <label>Description</label>
-                            <textarea placeholder="Enter book description" value={newBook.description} 
-                            onChange={(e) => setnewBook({
-                                ...newBook,description: e.target.value
-                            })} required/>
-                            <label>Image URL</label>
-                            <input type="text" placeholder="Enter image URL" value={newBook.image_url} 
-                            onChange={(e) => setnewBook({
-                                ...newBook, image_url: e.target.value
-                            })} required/>
+                        </div>
+
+<div className="form-row">
+    <div className="form-field">
+        <label>Book Genre <span className="required-star">*</span></label>
+        <input
+            type="text"
+            placeholder="Enter the book genre..."
+            value={newBook.genre}
+            onChange={(e) => setnewBook({
+                ...newBook, genre: e.target.value
+            })}
+            pattern="[A-Za-zÀ-ÿ &'-]+"
+            title="Genre must contain letters only, with spaces or common separators allowed."
+            required
+        />
+    </div>
+
+    <div className="form-field">
+        <label>Total Copies <span className="required-star">*</span></label>
+        <input
+            type="number"
+            min="1"
+            step="1"
+            placeholder="Enter the number of copies..."
+            value={newBook.total_copies}
+            onChange={(e) => setnewBook({
+                ...newBook, total_copies: e.target.value
+            })}
+            required
+        />
+    </div>
+</div>
+
+<label>Description</label>
+<textarea
+    placeholder="Enter book description (optional)"
+    value={newBook.description}
+    onChange={(e) => setnewBook({
+        ...newBook, description: e.target.value
+    })}
+/>
+
+<label>Image URL <span className="required-star">*</span></label>
+<input
+    type="url"
+    placeholder="https://example.com/book-image.jpg"
+    value={newBook.image_url}
+    onChange={(e) => setnewBook({
+        ...newBook, image_url: e.target.value
+    })}
+    required
+/>
                             <div className="add-form-buttons">
                                 <button type="button" className="cancel-button"onClick={() => setform(false)}>Cancel</button>
                                 <button type="submit" className="save-book-button">Add Book</button>
