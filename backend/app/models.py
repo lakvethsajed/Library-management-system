@@ -36,6 +36,7 @@ class Bookissue(Base):
     issued_at = Column(TIMESTAMP, nullable = False, server_default = text('now()'))
     due_date = Column(TIMESTAMP , nullable = False)
     returned_at = Column(TIMESTAMP)
+    return_requested = Column(Boolean, default=False, nullable=False)
 
 class Login_session(Base):
     __tablename__ = "Token_store"

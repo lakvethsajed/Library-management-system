@@ -114,6 +114,8 @@ class ResponseBook(BaseModel):
     issued_at: datetime
     due_date: datetime
     returned_at: Optional[datetime] = None
+    return_requested: bool = False
+
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -127,6 +129,8 @@ class MyBookResponse(BaseModel):
     issued_at: datetime
     due_date: datetime
     returned_at: Optional[datetime] = None
+    return_requested: bool = False
+
 
 
 class CurrentUserResponse(BaseModel):
