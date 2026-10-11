@@ -210,36 +210,36 @@ const totalPages = Math.ceil(totalBooks / limit);
                                 <div className="form-field">
                                     <label>Book Title</label>
                                     <input type="text" placeholder="Enter the book title you want to add..." value={newBook.title} 
-                                    onChange={(e)=> setnewBook({...newBook,title: e.target.value})}/>
+                                    onChange={(e)=> setnewBook({...newBook,title: e.target.value})} required/>
                                 </div>
                                   <div className="form-field">
                                     <label>Book Author</label>
                                     <input type="text" placeholder="Enter the new Book author..." value={newBook.author}
-                                    onChange={(e)=> setnewBook({...newBook, author: e.target.value})}/>
+                                    onChange={(e)=> setnewBook({...newBook, author: e.target.value})} required/>
                                 </div>
                             </div>
                             <div className="form-row">
                                 <div className="form-field">
                                     <label>Book Genre</label>
                                     <input type="text" placeholder="Enter the new Book Genre..." value={newBook.genre}
-                                    onChange={(e)=> setnewBook({...newBook, genre: e.target.value})}/>
+                                    onChange={(e)=> setnewBook({...newBook, genre: e.target.value})} required/>
                                 </div>
                                 <div className="form-field">
                                     <label>Total Copies</label>
                                     <input type="number" min="1" placeholder="Enter the no of Copies you wish to add..." value={newBook.total_copies}
-                                    onChange={(e)=> setnewBook({...newBook, total_copies: e.target.value})}/>
+                                    onChange={(e)=> setnewBook({...newBook, total_copies: e.target.value})} required/>
                                 </div>
                             </div>
                             <label>Description</label>
                             <textarea placeholder="Enter book description" value={newBook.description} 
                             onChange={(e) => setnewBook({
                                 ...newBook,description: e.target.value
-                            })}/>
+                            })} required/>
                             <label>Image URL</label>
                             <input type="text" placeholder="Enter image URL" value={newBook.image_url} 
                             onChange={(e) => setnewBook({
                                 ...newBook, image_url: e.target.value
-                            })}/>
+                            })} required/>
                             <div className="add-form-buttons">
                                 <button type="button" className="cancel-button"onClick={() => setform(false)}>Cancel</button>
                                 <button type="submit" className="save-book-button">Add Book</button>
