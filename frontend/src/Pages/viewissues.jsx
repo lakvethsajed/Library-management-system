@@ -174,7 +174,7 @@ export default function ViewIssue() {
                                         <button
                                             onClick={() =>
                                                 handleConfirmReturn(issue.issue_id)
-                                            }
+                                            } className="confirm-button"
                                         >
                                             Confirm Return
                                         </button>

@@ -299,25 +299,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 8px;
-
     width: 100%;
-
     padding: 11px;
-
     border: none;
     border-radius: 7px;
-
     background-color: #ef4444;
     color: white;
-
     font-family: Georgia, "Times New Roman", serif;
     font-size: 17px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition: background-color 0.2s ease;
 }
 
@@ -361,6 +353,23 @@
     background-color: #dbeafe;
     color: #1d4ed8;
     border: 1px solid #bfdbfe;
+}
+.confirm-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 7px;
+    background-color: #ef4444;
+    color: white;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 @media (max-width: 900px) {
